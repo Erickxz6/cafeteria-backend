@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${titulo}">Menú</title>
+  <link rel="stylesheet" href="/css/cafeteria.css">
+</head>
+<body>
+  <h1 th:text="${titulo}">Título</h1>
+
+  <!-- Enlaces de filtro: @{/menu(tipo='bebida')} construye /menu?tipo=bebida -->
+  <p>
+    <a th:href="@{/menu}">Todos</a> ·
+    <a th:href="@{/menu(tipo='desayuno')}">Desayunos</a> ·
+    <a th:href="@{/menu(tipo='almuerzo')}">Almuerzos</a> ·
+    <a th:href="@{/menu(tipo='bebida')}">Bebidas</a>
+  </p>
+
+  <ul>
+    <li th:each="p : ${platos}">
+      <a th:href="@{/menu/{id}(id=${p.id})}" th:text="${p.nombre}">Plato</a>
+      · $ <span th:text="${#numbers.formatInteger(p.precio, 1, 'POINT')}">0</span>
+    </li>
+  </ul>
+  <p th:if="${#lists.isEmpty(platos)}">No hay platos de ese tipo.</p>
+</body>
+</html>

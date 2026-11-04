@@ -1,0 +1,52 @@
+/* Estilos de la cafetería: colores del Caribe */
+:root {
+  --mar: #0b4f6c;
+  --corozo: #9b1d3a;
+  --coco: #fff8ec;
+  --texto: #2b2b2b;
+}
+
+body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--coco);
+  color: var(--texto);
+}
+
+h1 {
+  color: var(--mar);
+  border-bottom: 4px solid var(--corozo);
+  padding-bottom: 8px;
+}
+
+a {
+  color: var(--mar);
+  font-weight: bold;
+}
+
+/* Los enlaces de filtro (están dentro de un párrafo) */
+p a {
+  display: inline-block;
+  background: var(--mar);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 16px;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Cada plato del menú */
+li {
+  background: white;
+  margin-bottom: 10px;
+  padding: 12px 16px;
+  border-left: 6px solid var(--corozo);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}

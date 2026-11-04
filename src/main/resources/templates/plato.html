@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${plato.nombre}">Plato</title>
+  <link rel="stylesheet" href="/css/cafeteria.css">
+</head>
+<body>
+  <h1 th:text="${plato.nombre}">Nombre</h1>
+  <p>Tipo: <span th:text="${plato.tipo}">tipo</span></p>
+  <p>Precio: $ <span th:text="${#numbers.formatInteger(plato.precio, 1, 'POINT')}">0</span></p>
+  <a th:href="@{/menu}">Volver al menú</a>
+</body>
+</html>
