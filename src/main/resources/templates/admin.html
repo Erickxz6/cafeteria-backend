@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Administrar platos</title>
+  <link rel="stylesheet" href="/css/cafeteria.css">
+</head>
+<body>
+  <h1>Administrar platos</h1>
+
+  <div class="barra">
+    <a th:href="@{/admin/platos/nuevo}" class="boton">+ Nuevo plato</a>
+    <a th:href="@{/menu}">Ver el menú público</a>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Nombre</th><th>Tipo</th><th>Precio</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+      <tr th:each="p : ${platos}">
+        <td th:text="${p.nombre}">Plato</td>
+        <td th:text="${p.tipo}">tipo</td>
+        <td>$ <span th:text="${#numbers.formatInteger(p.precio, 1, 'POINT')}">0</span></td>
+        <td class="acciones">
+          <a th:href="@{/admin/platos/{id}/editar(id=${p.id})}" class="boton secundario">Editar</a>
+          <form th:action="@{/admin/platos/{id}/eliminar(id=${p.id})}" method="post"
+                onsubmit="return confirm('¿Eliminar este plato?')">
+            <button type="submit" class="boton peligro">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="vacio" th:if="${#lists.isEmpty(platos)}">Todavía no hay platos.</div>
+</body>
+</html>

@@ -7,32 +7,42 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import co.edu.sena.adso.cafeteria.model.Plato;
+import co.edu.sena.adso.cafeteria.repository.PlatoRepository;
 
-@Service   // MODELO (lógica): guarda los datos y sabe buscarlos
+@Service   // MODELO (lógica): las reglas del menú. Los datos están en PostgreSQL
 public class MenuService {
 
-    private final List<Plato> platos = List.of(
-            new Plato(1L, "Arepa de huevo", "desayuno", 4000),
-            new Plato(2L, "Arroz con pollo", "almuerzo", 12000),
-            new Plato(3L, "Mojarra frita con patacón", "almuerzo", 18000),
-            new Plato(4L, "Jugo de corozo", "bebida", 3000),
-            new Plato(5L, "Limonada de coco", "bebida", 5000));
+    private final PlatoRepository repo;
+
+    public MenuService(PlatoRepository repo) {   // Spring entrega el repositorio
+        this.repo = repo;
+    }
 
     public List<Plato> todos() {
-        return platos;
+        return repo.findAllByOrderByNombreAsc();
     }
 
     public List<Plato> porTipo(String tipo) {
-        return platos.stream()
-                .filter(p -> p.tipo().equalsIgnoreCase(tipo))
-                .toList();
+        return repo.findByTipoIgnoreCaseOrderByNombreAsc(tipo);
     }
 
     public Plato buscar(Long id) {
-        return platos.stream()
-                .filter(p -> p.id().equals(id))
-                .findFirst()
+        return repo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "No existe el plato " + id));
+    }
+
+    // Regla: el tipo siempre se guarda en minúsculas
+    public Plato guardar(Plato plato) {
+        plato.setTipo(plato.getTipo().toLowerCase());
+        return repo.save(plato);          // sin id: INSERT · con id: UPDATE
+    }
+
+    // Regla: no se puede eliminar un plato que no existe
+    public void eliminar(Long id) {
+        if (!repo.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el plato " + id);
+        }
+        repo.deleteById(id);
     }
 }

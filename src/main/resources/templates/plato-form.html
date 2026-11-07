@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${accion}">Plato</title>
+  <link rel="stylesheet" href="/css/cafeteria.css">
+</head>
+<body>
+  <h1 th:text="${accion}">Nuevo plato</h1>
+
+  <form class="formulario" th:action="@{/admin/platos}" th:object="${plato}" method="post">
+    <input type="hidden" th:field="*{id}">
+
+    <label for="nombre">Nombre</label>
+    <input type="text" th:field="*{nombre}" required>
+
+    <label for="tipo">Tipo</label>
+    <select th:field="*{tipo}" required>
+      <option value="">Elija un tipo</option>
+      <option value="desayuno">Desayuno</option>
+      <option value="almuerzo">Almuerzo</option>
+      <option value="bebida">Bebida</option>
+    </select>
+
+    <label for="precio">Precio (pesos)</label>
+    <input type="number" th:field="*{precio}" min="0" step="100" required>
+
+    <div class="acciones">
+      <button type="submit" class="boton">Guardar</button>
+      <a th:href="@{/admin/platos}" class="boton secundario">Cancelar</a>
+    </div>
+  </form>
+</body>
+</html>
