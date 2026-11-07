@@ -1,0 +1,130 @@
+/* Estilos de "Acerca de": mismos colores del Caribe del resto de la cafetería */
+:root {
+  --mar: #0b4f6c;
+  --corozo: #9b1d3a;
+  --coco: #fff8ec;
+  --texto: #2b2b2b;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  background: var(--coco);
+  color: var(--texto);
+}
+
+/* ===== Header y navegación ===== */
+header h1 {
+  margin: 0 0 12px;
+  color: var(--mar);
+  border-bottom: 4px solid var(--corozo);
+  padding-bottom: 8px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 24px;
+  padding: 0;
+}
+
+nav a {
+  display: inline-block;
+  background: var(--mar);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav a:hover {
+  opacity: 0.85;
+}
+
+nav a[aria-current="page"] {
+  background: var(--corozo);
+}
+
+/* ===== Secciones como tarjetas (igual que los platos del menú) ===== */
+main section {
+  background: white;
+  margin-bottom: 14px;
+  padding: 14px 18px;
+  border-left: 6px solid var(--corozo);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+main h2 {
+  margin: 0 0 8px;
+  color: var(--mar);
+  font-size: 1.25rem;
+}
+
+main p {
+  margin: 0;
+}
+
+main p + p {
+  margin-top: 10px;
+}
+
+main ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+main li {
+  margin-bottom: 4px;
+}
+
+main li::marker {
+  color: var(--corozo);
+}
+
+strong {
+  color: var(--mar);
+}
+
+main a {
+  color: var(--mar);
+  font-weight: bold;
+}
+
+address {
+  font-style: normal;
+  line-height: 1.9;
+}
+
+/* ===== Footer ===== */
+footer {
+  margin-top: 24px;
+  padding-top: 12px;
+  border-top: 4px solid var(--corozo);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--mar);
+}
+
+/* ===== Celular ===== */
+@media (max-width: 480px) {
+  body {
+    padding: 16px 12px;
+  }
+
+  main section {
+    padding: 12px 14px;
+  }
+}

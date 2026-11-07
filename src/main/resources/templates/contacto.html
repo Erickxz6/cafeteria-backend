@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${accion}">Formulario de contacto</title>
+  <link rel="stylesheet" href="/css/cafeteria.css">
+</head>
+<body>
+  <h1 th:text="${accion}">Formulario de contacto</h1>
+
+  <p class="vacio" th:if="${enviado}">¡Gracias! Tu mensaje fue recibido.</p>
+
+  <form id="formContacto" class="formulario" th:action="@{/contacto}" th:object="${contacto}" method="post">
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" th:field="*{nombre}" required>
+
+    <label for="correo">Correo electrónico</label>
+    <input type="email" id="correo" th:field="*{correo}" required>
+
+    <label for="mensaje">Mensaje</label>
+    <textarea id="mensaje" th:field="*{mensaje}" rows="5" required></textarea>
+
+    <div class="acciones">
+      <button type="submit" class="boton">Enviar</button>
+      <a th:href="@{/menu}" class="boton secundario">Cancelar</a>
+    </div>
+  </form>
+
+  <!-- Ventana emergente con los datos ingresados -->
+  <dialog id="modalContacto" class="modal">
+    <div class="modal-contenido">
+      <h2>Revisa tus datos</h2>
+      <dl class="modal-datos">
+        <dt>Nombre</dt>
+        <dd id="datoNombre"></dd>
+        <dt>Correo</dt>
+        <dd id="datoCorreo"></dd>
+        <dt>Mensaje</dt>
+        <dd id="datoMensaje"></dd>
+      </dl>
+      <div class="acciones">
+        <button type="button" id="btnConfirmar" class="boton">Confirmar y enviar</button>
+        <button type="button" id="btnVolver" class="boton secundario">Volver</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const formulario = document.getElementById('formContacto');
+    const modal = document.getElementById('modalContacto');
+
+    formulario.addEventListener('submit', function (evento) {
+      evento.preventDefault();
+      document.getElementById('datoNombre').textContent = formulario.nombre.value.trim();
+      document.getElementById('datoCorreo').textContent = formulario.correo.value.trim();
+      document.getElementById('datoMensaje').textContent = formulario.mensaje.value.trim();
+      modal.showModal();
+    });
+
+    document.getElementById('btnConfirmar').addEventListener('click', function () {
+      modal.close();
+      formulario.submit();
+    });
+
+    document.getElementById('btnVolver').addEventListener('click', function () {
+      modal.close();
+    });
+  </script>
+</body>
+</html>

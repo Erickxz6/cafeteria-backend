@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import co.edu.sena.adso.cafeteria.model.Plato;
 import co.edu.sena.adso.cafeteria.service.MenuService;
+
+
 
 @Controller
 @RequestMapping("/admin/platos")   // Todas las rutas de la clase empiezan así

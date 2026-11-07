@@ -14,7 +14,13 @@
     <a th:href="@{/menu(tipo='desayuno')}">Desayunos</a> ·
     <a th:href="@{/menu(tipo='almuerzo')}">Almuerzos</a> ·
     <a th:href="@{/menu(tipo='bebida')}">Bebidas</a>
+    
   </p>
+
+  <div>
+      <a th:href="@{/contacto}" class="boton">Enviar contacto</a>
+      <a th:href="@{/menu/AcercaDe}" class="boton">Acerca de</a>
+  </div>
 
   <ul>
     <li th:each="p : ${platos}">
